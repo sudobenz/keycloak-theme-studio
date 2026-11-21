@@ -1,0 +1,52 @@
+name: keycloak-theme-studio
+
+services:
+  keycloak-theme-studio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        HTTP_PROXY: ${HTTP_PROXY:-}
+        HTTPS_PROXY: ${HTTPS_PROXY:-}
+        NO_PROXY: ${NO_PROXY:-localhost,127.0.0.1}
+        http_proxy: ${HTTP_PROXY:-}
+        https_proxy: ${HTTPS_PROXY:-}
+        no_proxy: ${NO_PROXY:-localhost,127.0.0.1}
+    image: keycloak-theme-studio:1.7.0
+    container_name: keycloak-theme-studio
+    restart: unless-stopped
+    ports:
+      - "${KTS_PORT:-8080}:8080"
+    environment:
+      TZ: ${TZ:-Europe/Paris}
+      KTS_KEYCLOAKIFY_CACHE_DIR: /data/keycloakify-cache
+      KTS_KEYCLOAKIFY_VERSION: 11.16.4
+      HTTP_PROXY: ${HTTP_PROXY:-}
+      HTTPS_PROXY: ${HTTPS_PROXY:-}
+      NO_PROXY: ${NO_PROXY:-localhost,127.0.0.1}
+      http_proxy: ${HTTP_PROXY:-}
+      https_proxy: ${HTTPS_PROXY:-}
+      no_proxy: ${NO_PROXY:-localhost,127.0.0.1}
+    volumes:
+      - kts_projects:/data/projects
+      - kts_keycloakify_cache:/data/keycloakify-cache
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp:size=32m,noexec,nosuid
+    cap_drop:
+      - ALL
+    networks:
+      - kts-internal
+
+volumes:
+  kts_projects:
+    name: kts_projects
+  kts_keycloakify_cache:
+    name: kts_keycloakify_cache
+
+networks:
+  kts-internal:
+    name: kts-internal
+    driver: bridge

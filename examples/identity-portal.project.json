@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 2,
+  "name": "identity-portal",
+  "displayName": "Identity Portal",
+  "description": "Starter project — Identity Portal",
+  "targetVersion": "26.1.4",
+  "types": [
+    "account",
+    "admin",
+    "email",
+    "login",
+    "welcome"
+  ],
+  "design": {
+    "primary": "#2457D6",
+    "accent": "#13B8A6",
+    "background": "#F2F5FA",
+    "surface": "#FFFFFF",
+    "text": "#162235",
+    "muted": "#6D7C91",
+    "fontFamily": "Inter, system-ui, -apple-system, Segoe UI, sans-serif",
+    "radius": 16,
+    "cardWidth": 440,
+    "brand": "Identity Portal",
+    "subtitle": "Connectez-vous à votre espace",
+    "showBrand": true,
+    "showRememberMe": true,
+    "showForgotPassword": true,
+    "shadow": true,
+    "logoData": "",
+    "logoName": "",
+    "formPlacement": "center",
+    "formIntegration": "free",
+    "formPositionX": 50,
+    "formPositionY": 50,
+    "formWidth": 440,
+    "formFrameEnabled": true,
+    "formPadding": 32,
+    "formRadius": 16,
+    "formBackgroundEnabled": true,
+    "formBackgroundOpacity": 100,
+    "formBorderEnabled": true,
+    "formBorderColor": "#e6eaf0",
+    "formBorderWidth": 1,
+    "formShadow": true,
+    "formContentAlignment": "left"
+  },
+  "advanced": {
+    "customCss": ".login-pf-page .card-pf { border: 1px solid #e7ebf2; }",
+    "files": {
+      "login/footer.ftl": "<#-- Footer placeholder: add and test your FreeMarker content here -->\n"
+    },
+    "assets": {}
+  },
+  "parents": {
+    "login": "keycloak.v2",
+    "account": "keycloak.v3",
+    "admin": "keycloak.v2",
+    "email": "keycloak",
+    "welcome": "keycloak"
+  }
+}

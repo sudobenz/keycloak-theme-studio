@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f7f8">
+  <meta name="description" content="Créez, personnalisez et préparez vos thèmes Keycloak.">
+  <title>Keycloak Studio — Éditeur de thèmes</title>
+  <link rel="stylesheet" href="/static/styles.css?v=1.7.0">
+</head>
+<body>
+  <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-layout" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16M13 8h5M13 12h5M13 16h3"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></symbol>
+    <symbol id="i-shield-check" viewBox="0 0 24 24"><path d="M12 3 20 7v5c0 4.5-3.2 7.5-8 9-4.8-1.5-8-4.5-8-9V7l8-4Z"/><path d="m8.5 12 2.2 2.2 4.8-4.8"/></symbol>
+    <symbol id="i-log-in" viewBox="0 0 24 24"><path d="M10 17l5-5-5-5M15 12H3"/><path d="M12 4h7a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-7"/></symbol>
+    <symbol id="i-user-round" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 20 7v5c0 4.5-3.2 7.5-8 9-4.8-1.5-8-4.5-8-9V7l8-4Z"/><path d="M12 8v4m0 4h.01"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></symbol>
+    <symbol id="i-house" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1V10Z"/></symbol>
+    <symbol id="i-id-card" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="11" r="2"/><path d="M5.5 16c.7-1.5 1.7-2 3-2s2.3.5 3 2M14 10h4M14 14h4"/></symbol>
+    <symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18h1.2a2 2 0 0 0 1.5-3.3 1.8 1.8 0 0 1 1.4-3h1.1A4.8 4.8 0 0 0 22 9.9C21.2 5.8 17.1 3 12 3Z"/><circle cx="7.5" cy="11" r=".8"/><circle cx="10" cy="7.5" r=".8"/><circle cx="15" cy="7.5" r=".8"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></symbol>
+    <symbol id="i-ruler" viewBox="0 0 24 24"><path d="M3 7 7 3l14 14-4 4L3 7Z"/><path d="m7 7 2-2m1 6 2-2m1 6 2-2"/></symbol>
+    <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4m-4 4 4-4 4 4"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></symbol>
+    <symbol id="i-save" viewBox="0 0 24 24"><path d="M5 3h12l4 4v14H3V3h2Z"/><path d="M7 3v6h9V3M7 21v-8h10v8"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8m-4-4v4"/></symbol>
+    <symbol id="i-smartphone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M10 18h4"/></symbol>
+    <symbol id="i-rotate" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M5.6 9A7 7 0 0 1 18 6l2 6M4 12l2 6a7 7 0 0 0 12.4-3"/></symbol>
+    <symbol id="i-image-plus" viewBox="0 0 24 24"><rect x="3" y="4" width="15" height="16" rx="2"/><circle cx="8" cy="9" r="1.4"/><path d="m18 14 3 3m-3-3v6m0-6h-6M4 17l4-4 3 3"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16m-10 4v7m4-7v7M6 7l1 14h10l1-14M9 7V4h6v3"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  </svg>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand-lockup">
+        <div class="brand-symbol"><span></span><span></span><span></span></div>
+        <div><strong>Keycloak Studio</strong><small>Éditeur de thèmes</small></div>
+      </div>
+
+      <div class="workspace-label">ESPACE DE TRAVAIL</div>
+      <nav class="main-nav" aria-label="Navigation principale">
+        <button class="nav-item active" data-view="design"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="4" width="17" height="16" rx="2.5"/><path d="M9 4v16M13 9h4M13 13h4M13 17h2"/></svg></span><span>Apparence</span></button>
+        <button class="nav-item" data-view="components"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg></span><span>Composants</span></button>
+        <button class="nav-item" data-view="sources"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg></span><span>Fichiers et code</span></button>
+        <button class="nav-item" data-view="compat"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 20 7.5v9L12 21l-8-4.5v-9L12 3Z"/><path d="m8.5 12 2.2 2.2 4.8-4.8"/></svg></span><span>Compatibilité</span></button>
+      </nav>
+
+      <div class="sidebar-separator"></div>
+      <div class="sidebar-section-head"><span>PROJET</span><span class="status-dot"></span></div>
+      <div class="project-mini-card">
+        <div class="project-avatar">K</div>
+        <div class="project-mini-text"><strong id="sidebarProjectName">identity-portal</strong><small id="sidebarProjectMeta">5 espaces</small></div>
+        <button class="icon-button tiny" id="projectMenuBtn" title="Gérer les projets" aria-label="Gérer les projets"><svg class="ui-icon"><use href="#i-more"/></svg></button>
+      </div>
+
+      <section class="sidebar-pages" aria-label="Pages Keycloak">
+        <div class="sidebar-section-head"><span>PAGES</span><span class="sidebar-count">05</span></div>
+        <div class="page-list">
+          <button class="page-item active" data-preview-space="login"><span class="page-glyph glyph-login"><svg class="ui-icon"><use href="#i-log-in"/></svg></span><span>Connexion</span><small>01</small></button>
+          <button class="page-item" data-preview-space="account"><span class="page-glyph glyph-account"><svg class="ui-icon"><use href="#i-user-round"/></svg></span><span>Compte utilisateur</span><small>02</small></button>
+          <button class="page-item" data-preview-space="admin"><span class="page-glyph glyph-admin"><svg class="ui-icon"><use href="#i-shield"/></svg></span><span>Administration</span><small>03</small></button>
+          <button class="page-item" data-preview-space="email"><span class="page-glyph glyph-email"><svg class="ui-icon"><use href="#i-mail"/></svg></span><span>E-mails</span><small>04</small></button>
+          <button class="page-item" data-preview-space="welcome"><span class="page-glyph glyph-welcome"><svg class="ui-icon"><use href="#i-house"/></svg></span><span>Page d’accueil</span><small>05</small></button>
+        </div>
+      </section>
+
+      <section class="sidebar-layers" aria-label="Réglages du thème">
+        <div class="sidebar-section-head"><span>RÉGLAGES</span></div>
+        <div class="layer-list">
+          <button class="layer-item" data-inspector-section="inspector-brand"><span class="layer-glyph"><svg class="ui-icon"><use href="#i-id-card"/></svg></span>Identité et logo</button>
+          <button class="layer-item" data-inspector-section="inspector-colors"><span class="layer-glyph"><svg class="ui-icon"><use href="#i-palette"/></svg></span>Couleurs</button>
+          <button class="layer-item" data-inspector-section="inspector-background"><span class="layer-glyph"><svg class="ui-icon"><use href="#i-image"/></svg></span>Arrière-plan</button>
+          <button class="layer-item" data-inspector-section="inspector-form-position"><span class="layer-glyph"><svg class="ui-icon"><use href="#i-layout"/></svg></span>Position du formulaire</button>
+          <button class="layer-item" data-inspector-section="inspector-layout"><span class="layer-glyph"><svg class="ui-icon"><use href="#i-ruler"/></svg></span>Mise en page</button>
+        </div>
+      </section>
+
+      <div class="sidebar-bottom">
+        <div class="sidebar-footer"><span class="online-dot"></span>Environnement local <span class="version-tag">v1.7.0</span></div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="breadcrumb"><span>Mes projets</span><b>/</b><strong id="breadcrumbName">identity-portal</strong></div>
+          <div class="autosave-indicator"><span class="saved-dot"></span><span id="saveState">Modifications locales</span></div>
+        </div>
+        <div class="topbar-actions">
+          <button class="button button-ghost" id="newProjectBtn" title="Créer un projet" aria-label="Créer un projet"><span class="button-icon"><svg class="ui-icon"><use href="#i-plus"/></svg></span>Nouveau</button>
+          <button class="button button-ghost" id="importBtn" title="Importer un projet ou un thème" aria-label="Importer un projet ou un thème"><span class="button-icon"><svg class="ui-icon"><use href="#i-upload"/></svg></span>Importer</button>
+          <input type="file" id="importFile" accept=".json,.zip,.jar,application/json,application/zip,application/java-archive" hidden>
+          <button class="button button-ghost" id="saveBtn" title="Enregistrer le projet" aria-label="Enregistrer le projet"><span class="button-icon"><svg class="ui-icon"><use href="#i-save"/></svg></span>Enregistrer</button>
+          <button class="button button-outline" id="validateBtn" title="Vérifier le thème" aria-label="Vérifier le thème"><span class="button-icon"><svg class="ui-icon"><use href="#i-check"/></svg></span>Vérifier</button>
+          <div class="export-wrap">
+            <button class="button button-primary" id="exportBtn" title="Exporter le thème" aria-label="Exporter le thème">Exporter <span class="chevron"><svg class="ui-icon"><use href="#i-chevron-down"/></svg></span></button>
+            <div class="export-menu" id="exportMenu" hidden>
+              <div class="export-menu-heading">PACKAGES KEYCLOAK</div>
+              <button data-export="keycloakify-jar" id="keycloakifyJarExportBtn">
+                <span><svg class="ui-icon"><use href="#i-code"/></svg></span>
+                <span><strong>JAR React · Keycloakify</strong><small>Login React + autres types conservés</small></span>
+              </button>
+              <div class="export-engine-status" id="keycloakifyBuildStatus" role="status">Vérification du moteur de compilation…</div>
+              <button data-export="jar"><span><svg class="ui-icon"><use href="#i-save"/></svg></span><span><strong>JAR natif</strong><small>Compatibilité et conservation des FTL</small></span></button>
+              <button data-export="zip"><span><svg class="ui-icon"><use href="#i-image"/></svg></span><span><strong>Archive ZIP</strong><small>Pour le dossier themes/</small></span></button>
+              <div class="export-menu-divider"></div>
+              <div class="export-menu-heading">SOURCES DU PROJET</div>
+              <button data-export="keycloakify-project"><span><svg class="ui-icon"><use href="#i-code"/></svg></span><span><strong>Projet React / Keycloakify</strong><small>Sources TypeScript, Vite et CSS</small></span></button>
+              <button data-export="json"><span>{ }</span><span><strong>Projet Studio JSON</strong><small>Sauvegarde modifiable du Studio</small></span></button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="project-toolbar">
+        <div class="project-title-group">
+          <div class="eyebrow" id="viewEyebrow">VOTRE THÈME</div>
+          <h1 id="viewTitle">Apparence du thème</h1>
+          <p class="view-description" id="viewDescription">Personnalisez l’écran de connexion et les autres pages de votre instance.</p>
+        </div>
+        <div class="project-controls">
+          <label class="inline-field"><span>Nom du thème</span><input id="themeName" value="identity-portal" maxlength="50" spellcheck="false"></label>
+          <label class="inline-field version-field"><span>Version Keycloak</span><select id="targetVersion"><option value="26.1.4">26.1.x</option><option value="26.4.0">26.4.x</option><option value="26.5.0">26.5.x</option><option value="26.6.0">26.6.x</option><option value="27.0.0">27.x</option><option value="custom">Personnalisée</option></select></label>
+        </div>
+      </section>
+
+      <section class="view view-design active" id="view-design">
+        <div class="editor-layout">
+          <section class="canvas-panel">
+            <div class="canvas-toolbar">
+              <div class="canvas-label"><span class="live-indicator"></span><div><strong>Aperçu de la page</strong><small class="canvas-subtitle">Le rendu se met à jour pendant vos modifications</small></div></div>
+              <div class="preview-controls">
+                <label class="compact-select space-select"><span>Espace</span><select id="previewType"><option value="login">Connexion</option><option value="account">Compte utilisateur</option><option value="admin">Administration</option><option value="email">E-mails</option><option value="welcome">Accueil</option></select></label>
+                <label class="compact-select"><span>Écran</span><select id="previewPage"><option value="login">Connexion</option><option value="register">Inscription</option><option value="reset">Mot de passe oublié</option><option value="otp">Code de vérification</option><option value="error">Message d'erreur</option></select></label>
+                <label class="compact-select zoom-select"><span>Zoom</span><select id="previewZoom" aria-label="Échelle de l’aperçu"><option value="60">60 %</option><option value="70">70 %</option><option value="75">75 %</option><option value="85">85 %</option><option value="100" selected>100 %</option></select></label><button class="fit-preview-button" id="fitPreviewBtn" type="button" title="Ajuster l’aperçu à la zone disponible">Ajuster</button>
+                <div class="device-switch" aria-label="Format de prévisualisation"><button class="active" data-device="desktop" title="Bureau"><svg class="ui-icon"><use href="#i-monitor"/></svg></button><button data-device="mobile" title="Mobile"><svg class="ui-icon"><use href="#i-smartphone"/></svg></button></div>
+              </div>
+            </div>
+            <div class="preview-stage" id="previewStage">
+              <div class="preview-grid"></div>
+              <div class="preview-drop-hint" aria-hidden="true">Déposez une image pour l’utiliser en arrière-plan</div>
+              <div class="preview-browser" id="previewBrowser">
+                <div class="browser-bar"><div class="browser-dots"><i></i><i></i><i></i></div><div class="browser-address"><span><svg class="ui-icon"><use href="#i-shield-check"/></svg></span> connexion.exemple.fr</div><div class="browser-tools"><svg class="ui-icon"><use href="#i-more"/></svg></div></div>
+                <iframe class="preview-viewport" id="previewViewport" title="Prévisualisation isolée du thème" sandbox="allow-scripts"></iframe>
+              </div>
+              <div class="preview-caption"><span>Simulation · non connecté à Keycloak</span><span id="previewPageLabel">CONNEXION / CONNEXION</span></div>
+            </div>
+            <div class="canvas-footer"><span><i class="footer-check">✓</i> Aperçu actualisé automatiquement</span><span>Vérifiez le rendu final sur votre serveur Keycloak.</span></div>
+          </section>
+
+          <aside class="inspector-panel" id="designInspector">
+            <div class="inspector-head"><div><span class="eyebrow">PERSONNALISATION</span><h2>Identité visuelle</h2></div><button class="icon-button" id="resetDesignBtn" title="Réinitialiser les réglages"><svg class="ui-icon"><use href="#i-rotate"/></svg></button></div>
+            <div class="inspector-scroll">
+              <section class="inspector-section" id="inspector-brand">
+                <div class="section-heading"><strong>Identité</strong><span>Nom, signature et logo</span></div>
+                <label class="field-label">Nom de l’espace<input id="brand" type="text" maxlength="80" value="Identity Portal"></label>
+                <label class="field-label">Texte sous le nom<input id="subtitle" type="text" maxlength="160" value="Connectez-vous à votre espace"></label>
+                <div class="upload-zone" id="logoZone"><input type="file" id="logoFile" accept="image/png,image/jpeg,image/webp" hidden><div class="upload-icon"><svg class="ui-icon"><use href="#i-image-plus"/></svg></div><div class="upload-copy"><strong id="logoUploadTitle">Ajouter un logo</strong><small>PNG, JPG ou WebP · 1,5 Mo max.</small></div><button class="text-button" id="uploadLogoBtn">Parcourir</button><button class="text-button danger-text" id="removeLogoBtn" hidden>Retirer</button></div>
+                <div class="toggle-row"><span>Afficher le nom et le logo</span><label class="switch"><input id="showBrand" type="checkbox" checked><span></span></label></div>
+              </section>
+
+              <section class="inspector-section" id="inspector-colors">
+                <div class="section-heading"><strong>Couleurs</strong><span>Choisissez les couleurs de votre thème</span></div>
+                <div class="color-grid">
+                  <label class="color-field"><span>Primaire</span><div><input id="primary" type="color" value="#2563eb"><code id="primaryHex">#2563EB</code></div></label>
+                  <label class="color-field"><span>Accent</span><div><input id="accent" type="color" value="#06b6d4"><code id="accentHex">#06B6D4</code></div></label>
+                  <label class="color-field"><span>Arrière-plan</span><div><input id="background" type="color" value="#eef2f7"><code id="backgroundHex">#EEF2F7</code></div></label>
+                  <label class="color-field"><span>Surface / carte</span><div><input id="surface" type="color" value="#ffffff"><code id="surfaceHex">#FFFFFF</code></div></label>
+                  <label class="color-field"><span>Texte</span><div><input id="text" type="color" value="#172033"><code id="textHex">#172033</code></div></label>
+                  <label class="color-field"><span>Texte secondaire</span><div><input id="muted" type="color" value="#667085"><code id="mutedHex">#667085</code></div></label>
+                </div>
+                <div class="preset-row"><span>Palettes prédéfinies</span><button class="preset-chip" data-preset="corporate"><i style="--swatch:#2563eb"></i> Corporate</button><button class="preset-chip" data-preset="midnight"><i style="--swatch:#8b5cf6"></i> Midnight</button><button class="preset-chip" data-preset="forest"><i style="--swatch:#0f8a68"></i> Forest</button></div>
+              </section>
+
+              <section class="inspector-section" id="inspector-background">
+                <div class="section-heading"><strong>Arrière-plan</strong><span>Image, cadrage et mouvement</span></div>
+                <input type="file" id="backgroundImageFile" accept="image/png,image/jpeg,image/webp" hidden>
+                <div class="background-image-zone" id="backgroundImageZone">
+                  <div class="background-image-preview" id="backgroundImagePreview"><svg class="ui-icon"><use href="#i-image"/></svg></div>
+                  <div class="background-image-meta"><strong id="backgroundImageName">Aucune image sélectionnée</strong><small>PNG, JPG ou WebP · 3 Mo maximum</small></div>
+                  <button class="text-button background-image-picker" id="uploadBackgroundBtn" type="button">Choisir</button>
+                  <button class="icon-button background-remove" id="removeBackgroundImageBtn" type="button" title="Retirer l’image" hidden><svg class="ui-icon"><use href="#i-trash"/></svg></button>
+                </div>
+                <label class="field-label">Mode de cadrage<select id="backgroundImageSize"><option value="cover">Remplir la zone</option><option value="contain">Afficher l’image entière</option></select></label>
+                <label class="field-label">Position de l’image<select id="backgroundImagePosition"><option value="center">Centrée</option><option value="top">En haut</option><option value="bottom">En bas</option><option value="left">À gauche</option><option value="right">À droite</option><option value="center top">Centrée en haut</option><option value="center bottom">Centrée en bas</option></select></label>
+                <div class="range-field"><div><label for="backgroundOverlay">Voile de contraste</label><output id="backgroundOverlayValue">0%</output></div><input id="backgroundOverlay" type="range" min="0" max="80" step="5" value="0"></div>
+                <div class="section-subheading"><strong>Animation du fond</strong><span>Effet CSS léger</span></div>
+                <label class="field-label">Mouvement<select id="backgroundAnimation"><option value="none">Aucun</option><option value="slow-zoom">Zoom lent</option><option value="drift">Déplacement subtil</option><option value="aurora">Aurore animée</option></select></label>
+                <div class="range-field"><div><label for="backgroundAnimationDuration">Durée de l’animation</label><output id="backgroundAnimationDurationValue">24 s</output></div><input id="backgroundAnimationDuration" type="range" min="8" max="60" step="2" value="24"></div>
+                <p class="field-help">L’animation est désactivée automatiquement lorsque le système demande de réduire les mouvements.</p>
+              </section>
+
+              <section class="inspector-section" id="inspector-form-position">
+                <div class="section-heading"><strong>Formulaire</strong><span>Position, largeur et intégration dans la page</span></div>
+                <label class="field-label">Mode d’intégration<select id="formIntegration">
+                  <option value="free">Position libre sur le fond</option>
+                  <option value="flow">Dans le flux de la page</option>
+                  <option value="panel-left">Aligné à gauche</option>
+                  <option value="panel-right">Aligné à droite</option>
+                </select></label>
+                <p class="field-help" id="formIntegrationHelp">Le formulaire est positionné librement sur la page. Déplacez-le dans l’aperçu ou utilisez les coordonnées ci-dessous.</p>
+                <div id="formPositionControls">
+                  <label class="field-label">Position prédéfinie<select id="formPlacement">
+                    <option value="center">Centre</option><option value="left">À gauche</option><option value="right">À droite</option>
+                    <option value="top">En haut</option><option value="bottom">En bas</option>
+                    <option value="top-left">En haut à gauche</option><option value="top-right">En haut à droite</option>
+                    <option value="bottom-left">En bas à gauche</option><option value="bottom-right">En bas à droite</option>
+                    <option value="custom">Coordonnées personnalisées</option>
+                  </select></label>
+                  <div class="position-grid">
+                    <div class="range-field"><div><label for="formPositionX">Horizontal</label><output id="formPositionXValue">50 %</output></div><input id="formPositionX" type="range" min="0" max="100" step="1" value="50"></div>
+                    <div class="range-field"><div><label for="formPositionY">Vertical</label><output id="formPositionYValue">50 %</output></div><input id="formPositionY" type="range" min="0" max="100" step="1" value="50"></div>
+                  </div>
+                  <p class="field-help">Astuce : faites glisser la poignée « Déplacer » au-dessus du formulaire dans l’aperçu.</p>
+                </div>
+                <div class="range-field"><div><label for="formWidth">Largeur du formulaire</label><output id="formWidthValue">440 px</output></div><input id="formWidth" type="range" min="240" max="1200" step="10" value="440"></div>
+                <div class="section-subheading"><strong>Cadre du formulaire</strong><span>Indépendant du contenu Keycloak</span></div>
+                <div class="preset-row form-preset-row"><span>Apparence rapide</span><button class="preset-chip" type="button" data-form-preset="card">Avec cadre</button><button class="preset-chip" type="button" data-form-preset="bare">Sans cadre</button></div>
+                <div class="toggle-row"><span>Afficher un fond / cadre</span><label class="switch"><input id="formFrameEnabled" type="checkbox" checked><span></span></label></div>
+                <fieldset id="formFrameControls" class="form-frame-controls">
+                  <legend class="sr-only">Options du cadre</legend>
+                  <div class="toggle-row"><span>Fond du formulaire</span><label class="switch"><input id="formBackgroundEnabled" type="checkbox" checked><span></span></label></div>
+                  <div class="range-field"><div><label for="formBackgroundOpacity">Opacité du fond</label><output id="formBackgroundOpacityValue">100 %</output></div><input id="formBackgroundOpacity" type="range" min="0" max="100" step="5" value="100"></div>
+                  <div class="toggle-row"><span>Bordure</span><label class="switch"><input id="formBorderEnabled" type="checkbox" checked><span></span></label></div>
+                  <div class="color-grid form-border-grid">
+                    <label class="color-field"><span>Couleur de bordure</span><div><input id="formBorderColor" type="color" value="#e6eaf0"><code id="formBorderColorHex">#E6EAF0</code></div></label>
+                    <div class="range-field"><div><label for="formBorderWidth">Épaisseur</label><output id="formBorderWidthValue">1 px</output></div><input id="formBorderWidth" type="range" min="0" max="8" value="1"></div>
+                  </div>
+                  <div class="toggle-row"><span>Ombre portée</span><label class="switch"><input id="formShadow" type="checkbox" checked><span></span></label></div>
+                  <div class="range-field"><div><label for="formRadius">Arrondi du conteneur</label><output id="formRadiusValue">16 px</output></div><input id="formRadius" type="range" min="0" max="80" step="1" value="16"></div>
+                </fieldset>
+                <div class="range-field"><div><label for="formPadding">Espacement autour du contenu</label><output id="formPaddingValue">32 px</output></div><input id="formPadding" type="range" min="0" max="120" step="2" value="32"></div>
+                <label class="field-label">Alignement du contenu<select id="formContentAlignment"><option value="left">À gauche</option><option value="center">Centré</option><option value="right">À droite</option></select></label>
+                <p class="field-help">« Sans cadre » retire le fond, la bordure, l’ombre et les arrondis. L’espacement reste réglable séparément : le formulaire peut ainsi respirer sans afficher de carte visible.</p>
+              </section>
+
+              <section class="inspector-section" id="inspector-layout">
+                <div class="section-heading"><strong>Mise en page</strong><span>Typographie et champs</span></div>
+                <label class="field-label">Police de caractères<select id="fontFamily"><option value="Inter, system-ui, -apple-system, Segoe UI, sans-serif">Inter / System UI</option><option value="Arial, Helvetica, sans-serif">Arial</option><option value="Georgia, serif">Georgia</option><option value="'Trebuchet MS', sans-serif">Trebuchet MS</option><option value="'Courier New', monospace">Courier New</option></select></label>
+                <div class="range-field"><div><label for="radius">Arrondi des champs</label><output id="radiusValue">16 px</output></div><input id="radius" type="range" min="0" max="32" value="16"></div>
+                <div class="toggle-row"><span>Afficher « Se souvenir de moi »</span><label class="switch"><input id="showRememberMe" type="checkbox" checked><span></span></label></div>
+                <div class="toggle-row"><span>Afficher « Mot de passe oublié »</span><label class="switch"><input id="showForgotPassword" type="checkbox" checked><span></span></label></div>
+              </section>
+            </div>
+            <div class="inspector-foot"><span><i class="footer-check">✓</i> Modifications appliquées</span><button class="text-button" data-view-link="sources">CSS avancé ↗</button></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="view" id="view-components">
+        <div class="content-layout">
+          <div class="content-main">
+            <div class="content-heading"><div><span class="eyebrow">ÉLÉMENTS DE PAGE</span><h2>Bibliothèque de composants</h2><p>Références visuelles des éléments utilisés dans le thème.</p></div><span class="count-pill">6 familles</span></div>
+            <div class="component-grid">
+              <article class="component-card"><div class="component-card-top"><div class="component-icon"><svg class="ui-icon"><use href="#i-layout"/></svg></div><span class="component-status">Réglages partagés</span></div><h3>Boutons</h3><p>Action primaire, secondaire, états actifs et survol.</p><div class="component-demo"><button class="demo-btn primary-demo">Se connecter</button><button class="demo-btn secondary-demo">Annuler</button></div><small>La couleur et l’arrondi reprennent les réglages généraux.</small></article>
+              <article class="component-card"><div class="component-card-top"><div class="component-icon"><svg class="ui-icon"><use href="#i-ruler"/></svg></div><span class="component-status">Réglages partagés</span></div><h3>Champs de saisie</h3><p>Champs texte, mot de passe et états de validation.</p><div class="component-demo demo-inputs"><input placeholder="Nom d'utilisateur" disabled><input placeholder="••••••••••" disabled></div><small>Le rendu exact dépend de la version Keycloak et des composants du thème parent.</small></article>
+              <article class="component-card"><div class="component-card-top"><div class="component-icon"><svg class="ui-icon"><use href="#i-shield-check"/></svg></div><span class="component-status">Exemple visuel</span></div><h3>Alertes & notifications</h3><p>Information, avertissement, succès et erreurs.</p><div class="component-demo"><div class="demo-alert success-alert">✓ Opération réalisée</div><div class="demo-alert error-alert">! Identifiants invalides</div></div><small>Les classes natives Keycloak restent pilotées par les templates.</small></article>
+              <article class="component-card"><div class="component-card-top"><div class="component-icon"><svg class="ui-icon"><use href="#i-grid"/></svg></div><span class="component-status">Réglages partagés</span></div><h3>Cartes & conteneurs</h3><p>Surfaces, contours, ombres et rayons.</p><div class="component-demo"><div class="demo-card">Contenu de la carte <span>⋯</span></div></div><small>Surface, ombre et arrondi réutilisent les propriétés globales.</small></article>
+              <article class="component-card"><div class="component-card-top"><div class="component-icon"><strong>Aa</strong></div><span class="component-status">Réglages partagés</span></div><h3>Typographie</h3><p>Titres, libellés, paragraphes et liens.</p><div class="component-demo type-demo"><strong>Heading / H2</strong><span>Texte de description du composant</span><a href="#" onclick="return false">Lien d'action ↗</a></div><small>La police choisie est utilisée dans les différents écrans.</small></article>
+              <article class="component-card"><div class="component-card-top"><div class="component-icon"><svg class="ui-icon"><use href="#i-id-card"/></svg></div><span class="component-status">Exemple visuel</span></div><h3>Navigation & identité</h3><p>Logo, navigation, séparateurs et pied de page.</p><div class="component-demo nav-demo"><div class="nav-demo-logo">K</div><div><strong id="componentBrandPreview">Identity Portal</strong><small>Portail sécurisé</small></div><span>⋮</span></div><small>Les éléments réellement disponibles dépendent de l'écran Keycloak.</small></article>
+            </div>
+          </div>
+          <aside class="info-panel"><span class="eyebrow">COMMENT ÇA FONCTIONNE</span><h3>Des réglages partagés</h3><p>Les couleurs, les polices et les formes définies dans l’apparence générale sont reprises par les composants présentés ici.</p><div class="info-stat"><strong>6</strong><span>familles de composants documentées</span></div><div class="info-note"><strong>À connaître</strong><p>La personnalisation visuelle ne remplace pas les composants fonctionnels de Keycloak. Une modification complète de ces consoles nécessite un projet React dédié.</p></div><button class="button button-outline full-width" data-view-link="sources">Modifier les fichiers du thème</button></aside>
+        </div>
+      </section>
+
+      <section class="view" id="view-sources">
+        <div class="content-layout source-layout">
+          <div class="source-main">
+            <div class="content-heading source-heading"><div><span class="eyebrow">PERSONNALISATION AVANCÉE</span><h2>Fichiers du thème</h2><p>Modifiez les ressources et les templates inclus dans le package.</p></div><div class="source-actions"><button class="button button-outline" id="newFileBtn"><span class="button-icon"><svg class="ui-icon"><use href="#i-plus"/></svg></span>Nouveau fichier</button><button class="button button-outline" id="downloadAssetBtn" hidden>Télécharger</button><button class="button button-outline" id="deleteFileBtn">Supprimer</button><button class="button button-primary" id="applySourceBtn">Appliquer</button></div></div>
+            <div class="code-workbench">
+              <div class="file-tree"><div class="file-tree-head"><span>FICHIERS DU PROJET</span><span id="fileCount">1</span></div><button class="file-item active" data-file="__customCss"><span class="file-type css-type">#</span><span>CSS personnalisé</span><small>CSS</small></button><div id="customFileList"></div><div id="customAssetList"></div><div class="file-tree-help">Les fichiers ajoutés ici sont rangés dans le bon dossier Keycloak et inclus à l’export.</div></div>
+              <div class="code-editor-panel"><div class="editor-toolbar"><div><span class="file-breadcrumb">advanced / <strong id="activeFileName">custom.css</strong></span><span class="editor-language" id="editorLanguage">CSS</span></div><span class="editor-state" id="editorState">Prêt</span></div><textarea id="sourceEditor" spellcheck="false" aria-label="Éditeur de code" placeholder="/* Ajoutez vos styles CSS personnalisés ici */"></textarea><div class="editor-footer"><span>UTF-8</span><span id="sourceLineCount">1 ligne</span><span>Indentation : 2 espaces</span></div></div>
+            </div>
+            <div class="source-warning"><span>!</span><p><strong>Attention aux templates FreeMarker.</strong> Un fichier .ftl personnalisé remplace le template hérité correspondant. Il doit être maintenu et testé à chaque mise à jour Keycloak. N'importez que du code de confiance.</p></div>
+          </div>
+          <aside class="info-panel source-info"><span class="eyebrow">FICHIERS GÉNÉRÉS</span><h3>Structure Keycloak</h3><div class="source-capability"><b>01</b><div><strong>theme.properties</strong><small>Parent, styles, locales et propriétés du thème.</small></div></div><div class="source-capability"><b>02</b><div><strong>CSS / JavaScript</strong><small>Ressources statiques attachées au bon type.</small></div></div><div class="source-capability"><b>03</b><div><strong>FreeMarker</strong><small>Templates .ftl fournis explicitement par l'utilisateur.</small></div></div><div class="source-capability"><b>04</b><div><strong>Messages</strong><small>Bundles .properties UTF-8 multilingues.</small></div></div><div class="info-note"><strong>Import de thème</strong><p>Vous pouvez importer une archive ZIP ou JAR existante. Les fichiers, les ressources et les thèmes parents sont analysés avant leur ajout au projet.</p></div></aside>
+        </div>
+      </section>
+
+      <section class="view" id="view-compat">
+        <div class="content-layout compat-layout">
+          <div class="content-main">
+            <div class="content-heading"><div><span class="eyebrow">CIBLE DE DÉPLOIEMENT</span><h2>Cible Keycloak</h2><p>Choisissez les types de thèmes et les thèmes parents à utiliser lors de la génération.</p></div><span class="count-pill" id="activeTypeCount">5 types sélectionnés</span></div>
+            <div class="type-grid">
+              <label class="type-card"><input type="checkbox" data-type="login" id="type-login" checked><div class="type-icon"><svg class="ui-icon"><use href="#i-log-in"/></svg></div><div><strong>Connexion</strong><small>Connexion, inscription, code de vérification, erreurs et actions requises.</small><span class="type-kind">FreeMarker + CSS</span></div></label>
+              <label class="type-card"><input type="checkbox" data-type="account" id="type-account" checked><div class="type-icon"><svg class="ui-icon"><use href="#i-user-round"/></svg></div><div><strong>Compte utilisateur</strong><small>Profil, sessions, mots de passe et sécurité du compte.</small><span class="type-kind">React SPA + thème</span></div></label>
+              <label class="type-card"><input type="checkbox" data-type="admin" id="type-admin" checked><div class="type-icon"><svg class="ui-icon"><use href="#i-shield"/></svg></div><div><strong>Administration</strong><small>Console d'administration Keycloak.</small><span class="type-kind">React SPA + thème</span></div></label>
+              <label class="type-card"><input type="checkbox" data-type="email" id="type-email" checked><div class="type-icon"><svg class="ui-icon"><use href="#i-mail"/></svg></div><div><strong>E-mails</strong><small>Vérification d’adresse, réinitialisation et notifications.</small><span class="type-kind">FreeMarker + messages</span></div></label>
+              <label class="type-card"><input type="checkbox" data-type="welcome" id="type-welcome" checked><div class="type-icon"><svg class="ui-icon"><use href="#i-house"/></svg></div><div><strong>Page d’accueil</strong><small>Page d'accueil fournie par Keycloak.</small><span class="type-kind">FreeMarker + CSS</span></div></label>
+            </div>
+            <div class="parent-table-card"><div class="table-heading"><div><strong>Thèmes parents</strong><small>Valeurs de base générées selon la version choisie.</small></div><button class="text-button" id="resetParentsBtn"><svg class="ui-icon inline-icon"><use href="#i-rotate"/></svg> Réinitialiser les parents</button></div><div class="parent-table-wrap"><table><thead><tr><th>ESPACE</th><th>THÈME PARENT</th><th>PERSONNALISATION</th></tr></thead><tbody id="parentTableBody"></tbody></table></div></div>
+          </div>
+          <aside class="info-panel compat-info"><span class="eyebrow">VERSION CIBLE</span><h3>Avant de générer le thème</h3><div class="version-card"><div class="version-card-icon">K</div><div><small>VERSION CIBLE</small><strong id="versionSummary">Keycloak 26.1.x</strong></div><span class="ready-pill">Configuré</span></div><div class="compat-alert"><span>i</span><p>Les parents affichés sont des valeurs par défaut. Ils peuvent varier selon la distribution, les fonctionnalités activées et les parents réellement présents dans votre installation.</p></div><div class="info-note"><strong>Évolution Keycloak 27</strong><p>Le parent du thème Login est passé à <code>keycloak.v3</code> avec PatternFly 6. Les anciens parents `keycloak` et `keycloak.v2` ne sont plus disponibles pour Login sur cette branche.</p></div><button class="button button-primary full-width" id="compatValidateBtn">Lancer les contrôles</button></aside>
+        </div>
+      </section>
+
+      <footer class="global-footer"><span class="status-left"><i class="status-check">✓</i> Prêt</span><span id="workspaceStatus">Thème local · Modifications enregistrées dans le navigateur</span><span class="status-right">Keycloak <b id="statusVersion">26.1.x</b> <i class="status-divider"></i> Aperçu <b id="previewZoomValue">100 %</b></span></footer>
+    </main>
+  </div>
+
+  <div class="toast-region" id="toastRegion" aria-live="polite"></div>
+
+  <div class="modal-backdrop" id="projectModal" hidden>
+    <section class="validation-modal workspace-modal" role="dialog" aria-modal="true" aria-labelledby="projectModalTitle">
+      <div class="modal-head"><div><span class="eyebrow">PROJETS</span><h2 id="projectModalTitle">Créer un projet</h2></div><button class="icon-button" id="closeProjectModal" aria-label="Fermer"><svg class="ui-icon"><use href="#i-x"/></svg></button></div>
+      <div id="projectCreatePanel" class="project-create-panel">
+        <label class="field-label">Nom du thème<input id="projectNameInput" maxlength="50" value="my-keycloak-theme" autocomplete="off"></label>
+        <label class="field-label">Point de départ<select id="projectPreset"><option value="blank">Projet vierge</option><option value="corporate">Corporate</option><option value="midnight">Midnight</option><option value="forest">Forest</option></select></label>
+        <div class="modal-actions"><button class="button button-outline" id="cancelProjectCreate">Annuler</button><button class="button button-primary" id="createProjectConfirm">Créer le projet</button></div>
+      </div>
+      <div id="projectManagePanel" hidden>
+        <div class="project-list-toolbar"><span>Projets enregistrés sur ce serveur</span><button class="text-button" id="refreshProjectsBtn">Actualiser ↻</button></div>
+        <div id="projectList" class="project-list"><div class="empty-state">Chargement des projets…</div></div>
+        <div class="modal-actions"><button class="button button-outline" id="closeProjectManager">Fermer</button><button class="button button-primary" id="managerNewProject">Nouveau projet</button></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="modal-backdrop" id="fileModal" hidden>
+    <section class="validation-modal workspace-modal" role="dialog" aria-modal="true" aria-labelledby="fileModalTitle">
+      <div class="modal-head"><div><span class="eyebrow">FICHIERS DU THÈME</span><h2 id="fileModalTitle">Ajouter un fichier</h2></div><button class="icon-button" id="closeFileModal" aria-label="Fermer"><svg class="ui-icon"><use href="#i-x"/></svg></button></div>
+      <label class="field-label">Type de thème<select id="newFileType"><option value="login">Login</option><option value="account">Account</option><option value="admin">Admin</option><option value="email">Email</option><option value="welcome">Welcome</option></select></label>
+      <label class="field-label">Chemin et nom du fichier<input id="newFilePath" value="resources/css/custom.css" maxlength="180" spellcheck="false"></label>
+      <label class="field-label">Modèle de départ<select id="newFileTemplate"><option value="blank">Fichier vide</option><option value="css">Feuille CSS</option><option value="js">JavaScript</option><option value="ftl">Template FreeMarker minimal</option><option value="messages">Messages français</option></select></label>
+      <div class="modal-actions"><button class="button button-outline" id="cancelFileCreate">Annuler</button><button class="button button-primary" id="createFileConfirm">Ajouter le fichier</button></div>
+    </section>
+  </div>
+
+  <div class="modal-backdrop" id="validationModal" hidden><section class="validation-modal"><div class="modal-head"><div><span class="eyebrow">VÉRIFICATION</span><h2>Résultat des contrôles</h2></div><button class="icon-button" id="closeValidation">✕</button></div><div id="validationResult"></div><div class="modal-actions"><button class="button button-outline" id="closeValidationBtn">Fermer</button><button class="button button-primary" id="modalExportZip">Exporter en ZIP</button></div></section></div>
+
+  <script src="/static/app.js?v=1.7.0" defer></script>
+</body>
+</html>

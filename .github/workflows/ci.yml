@@ -1,0 +1,102 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run unit tests
+        run: python -m unittest discover -s tests -v
+      - name: Compile Python sources
+        run: python -m compileall -q app tests
+
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check JavaScript syntax
+        run: node --check app/static/app.js
+
+
+  keycloakify-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Ensure Maven is available
+        run: |
+          if ! command -v mvn >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y maven
+          fi
+          mvn -version
+      - name: Install Studio dependencies
+        run: pip install -r requirements.txt
+      - name: Generate the Keycloakify sample project
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from app.main import normalize_project
+          from app.keycloakify_engine import keycloakify_project_files
+          source = json.loads(Path('examples/identity-portal-keycloakify.project.json').read_text())
+          project = normalize_project(source)
+          output = Path('.ci-keycloakify')
+          output.mkdir(exist_ok=True)
+          for name, content in keycloakify_project_files(project).items():
+              target = output / name
+              target.parent.mkdir(parents=True, exist_ok=True)
+              target.write_bytes(content)
+          PY
+      - name: Build the Keycloakify Login JAR
+        working-directory: .ci-keycloakify
+        run: |
+          npm install --no-audit --no-fund
+          npm run build-keycloak-theme
+      - name: Validate generated JAR
+        run: |
+          python - <<'PY'
+          import json
+          import zipfile
+          from pathlib import Path
+          jars = list(Path('.ci-keycloakify/dist_keycloak').glob('*.jar'))
+          assert jars, 'Keycloakify did not produce a JAR'
+          for path in jars:
+              with zipfile.ZipFile(path) as archive:
+                  assert 'META-INF/keycloak-themes.json' in archive.namelist()
+                  manifest = json.loads(archive.read('META-INF/keycloak-themes.json'))
+                  assert any(item['name'] == 'identity-portal' for item in manifest['themes'])
+          print('Keycloakify JAR validated:', ', '.join(path.name for path in jars))
+          PY
+
+  docker-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: false
+          tags: keycloak-theme-studio:ci
