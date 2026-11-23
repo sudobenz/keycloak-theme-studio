@@ -2,6 +2,10 @@
 
 **Keycloak Theme Studio** est une application web autonome pour concevoir, prévisualiser et générer des thèmes Keycloak. Le Studio combine un éditeur visuel, une prévisualisation de pages et un moteur de génération hybride : Keycloakify/React pour Login, génération native pour les autres types encore non pris en charge par ce moteur.
 
+## Demo
+
+![Keycloak Studio](demo/Animation_Keycloak_Studio.gif)
+
 > Version : `1.7.0` — positionnement libre du formulaire, intégration flexible et cadre entièrement facultatif
 
 ![Interface Keycloak Theme Studio](docs/screenshots/workspace-v1.4.0.png)
